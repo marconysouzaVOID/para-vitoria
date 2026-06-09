@@ -16,9 +16,19 @@
 body{
     font-family: Arial, sans-serif;
     min-height:100vh;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
-    color:white;
     overflow-x:hidden;
+    color:white;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #f7b267 0%,
+            #f79d65 35%,
+            #f4845f 60%,
+            #d95d39 100%
+        );
+
+    position:relative;
 }
 
 #stars{
@@ -46,7 +56,8 @@ body{
 }
 
 .card{
-    background:rgba(255,255,255,.95);
+    background:rgba(255,255,255,.88); 
+    backdrop-filter:blur(8px);
     color:#333;
     border-radius:25px;
     padding:40px;
@@ -101,6 +112,30 @@ button:hover{
     position:fixed;
     pointer-events:none;
     animation:subir 5s linear forwards;
+}
+
+.trees{
+    position:fixed;
+    bottom:0;
+    width:220px;
+    height:100%;
+    opacity:.18;
+    pointer-events:none;
+}
+
+.left{
+    left:0;
+    background:
+    url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=800&auto=format&fit=crop")
+    center bottom/cover;
+}
+
+.right{
+    right:0;
+    transform:scaleX(-1);
+    background:
+    url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=800&auto=format&fit=crop")
+    center bottom/cover;
 }
 
 @keyframes subir{
@@ -313,19 +348,19 @@ function iniciar(){
 
 function atualizarContador(){
 
-    const inicio = new Date(2017,8,25);
-    const hoje = new Date();
+    const inicio = new Date("2017-09-25T00:00:00");
+    const agora = new Date();
 
     let anos =
-        hoje.getFullYear() -
+        agora.getFullYear() -
         inicio.getFullYear();
 
     let meses =
-        hoje.getMonth() -
+        agora.getMonth() -
         inicio.getMonth();
 
     let dias =
-        hoje.getDate() -
+        agora.getDate() -
         inicio.getDate();
 
     if(dias < 0){
@@ -334,8 +369,8 @@ function atualizarContador(){
 
         const ultimoMes =
             new Date(
-                hoje.getFullYear(),
-                hoje.getMonth(),
+                agora.getFullYear(),
+                agora.getMonth(),
                 0
             );
 
@@ -348,9 +383,13 @@ function atualizarContador(){
         meses += 12;
     }
 
+    const horas = agora.getHours();
+    const minutos = agora.getMinutes();
+    const segundos = agora.getSeconds();
+
     document.getElementById("contador")
         .innerHTML =
-        `❤️ ${anos} anos, ${meses} meses e ${dias} dias juntos ❤️`;
+        `❤️ Juntos há ${anos} anos, ${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos ❤️`;
 }
 
 function gerarCoracoes(){
