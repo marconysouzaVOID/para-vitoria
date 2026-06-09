@@ -6,137 +6,239 @@
 <title>Para Vitória ❤️</title>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    color:#333;
+    text-align:center;
+    overflow-x:hidden;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+h1{
+    color:#ff4d6d;
+    margin-bottom:15px;
+}
+
+button{
+    background:#ff4d6d;
+    color:white;
+    border:none;
+    padding:15px 30px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:18px;
+    margin-top:20px;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.hidden{
+    display:none;
+}
+
+#contador{
+    font-size:24px;
+    margin:30px 0;
+    font-weight:bold;
+    color:#ff4d6d;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    margin-top:30px;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:15px;
+    height:250px;
+    object-fit:cover;
+}
+
+.mensagem{
+    margin-top:30px;
+    line-height:1.8;
+    font-size:20px;
+}
+
+.heart{
+    position:fixed;
+    font-size:25px;
+    animation:float 5s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(0);
+        opacity:1;
     }
-
-    body {
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(135deg, #ff758c, #ff7eb3);
-        font-family: Arial, sans-serif;
-        overflow: hidden;
-    }
-
-    .card {
-        background: rgba(255,255,255,0.95);
-        padding: 35px;
-        border-radius: 25px;
-        text-align: center;
-        max-width: 450px;
-        box-shadow: 0 15px 40px rgba(0,0,0,.15);
-    }
-
-    h1 {
-        color: #ff4d6d;
-        margin-bottom: 15px;
-    }
-
-    p {
-        color: #555;
-        margin-bottom: 20px;
-    }
-
-    button {
-        background: #ff4d6d;
-        color: white;
-        border: none;
-        padding: 14px 28px;
-        border-radius: 999px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: .3s;
-    }
-
-    button:hover {
-        transform: scale(1.05);
-    }
-
-    #mensagem {
-        margin-top: 25px;
-        line-height: 1.8;
-        color: #333;
-        opacity: 0;
-        transition: 1s;
-    }
-
-    .heart {
-        position: absolute;
-        font-size: 24px;
-        animation: float 5s linear forwards;
-    }
-
-    @keyframes float {
-        from {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateY(-700px);
-            opacity: 0;
-        }
-    }
-</style>
-</head>
-<body>
-
-<div class="card">
-    <h1>Para Mozi ❤️</h1>
-    <p>Clique no botão abaixo.</p>
-
-    <button onclick="surpresa()">
-        Clique aqui ✨
-    </button>
-
-    <div id="mensagem"></div>
-</div>
-
-<script>
-function surpresa() {
-
-    const mensagem = document.getElementById("mensagem");
-
-    mensagem.innerHTML = `
-        <strong>Do Loteamento Nova Aurora até a 13 de Julho...</strong><br><br>
-
-        Mudaram as ruas, os caminhos e os lugares.<br>
-        Mudamos também.<br><br>
-
-        Mas existe uma coisa que continuou exatamente igual:<br><br>
-
-        <strong>Eu continuo escolhendo você.</strong> ❤️<br><br>
-
-        Obrigado por fazer parte da minha história
-        e por transformar os dias comuns
-        nos meus dias favoritos.<br><br>
-
-        Te amo, Vivi. ❤️<br><br>
-
-    `;
-
-    mensagem.style.opacity = "1";
-
-    for(let i = 0; i < 40; i++) {
-        setTimeout(() => {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "❤️";
-
-            heart.style.left = Math.random() * window.innerWidth + "px";
-            heart.style.top = window.innerHeight + "px";
-
-            document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
-        }, i * 120);
+    to{
+        transform:translateY(-700px);
+        opacity:0;
     }
 }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Para Vitória ❤️</h1>
+
+<p>
+Tenho uma pequena surpresa para você...
+</p>
+
+<button onclick="iniciar()">
+Clique aqui ✨
+</button>
+
+<div id="conteudo" class="hidden">
+
+<h2 style="margin-top:30px;">
+Do Loteamento Nova Aurora até a 13 de Julho...
+</h2>
+
+<div id="contador"></div>
+
+<div class="mensagem">
+
+Mudaram os bairros.<br>
+Mudaram as ruas.<br>
+Mudaram os anos.<br><br>
+
+Mas existe uma coisa que nunca mudou:<br><br>
+
+<strong>
+Eu continuo escolhendo você todos os dias.
+</strong> ❤️<br><br>
+
+Obrigado por caminhar comigo desde
+25 de setembro de 2017.<br><br>
+
+Você é minha melhor amiga,
+minha companheira
+e meu lugar favorito no mundo. ❤️
+
+</div>
+
+<div class="gallery">
+
+<!-- TROQUE DEPOIS PELAS FOTOS DE VOCÊS -->
+
+<img src="https://picsum.photos/600/600?random=1">
+
+<img src="https://picsum.photos/600/600?random=2">
+
+<img src="https://picsum.photos/600/600?random=3">
+
+<img src="https://picsum.photos/600/600?random=4">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Troque pelo mp3 real -->
+<audio id="musica" loop>
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function iniciar(){
+
+    document.getElementById("conteudo").classList.remove("hidden");
+
+    document.getElementById("musica")
+        .play()
+        .catch(()=>{});
+
+    gerarCoracoes();
+
+    atualizarContador();
+
+    setInterval(atualizarContador,1000);
+}
+
+function atualizarContador(){
+
+    const inicio = new Date("2017-09-25T00:00:00");
+
+    const agora = new Date();
+
+    const diff = agora - inicio;
+
+    const dias = Math.floor(diff / (1000*60*60*24));
+
+    const horas =
+      Math.floor(diff/(1000*60*60)) % 24;
+
+    const minutos =
+      Math.floor(diff/(1000*60)) % 60;
+
+    const segundos =
+      Math.floor(diff/1000) % 60;
+
+    document.getElementById("contador").innerHTML =
+      `❤️ Juntos há ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos ❤️`;
+}
+
+function gerarCoracoes(){
+
+    setInterval(()=>{
+
+        const heart =
+          document.createElement("div");
+
+        heart.classList.add("heart");
+
+        heart.innerHTML = "❤️";
+
+        heart.style.left =
+          Math.random() * window.innerWidth + "px";
+
+        heart.style.bottom = "-30px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },5000);
+
+    },300);
+}
+
 </script>
 
 </body>
