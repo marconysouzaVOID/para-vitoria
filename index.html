@@ -56,6 +56,8 @@ body{
 }
 
 .card{
+    position:relative;
+    z-index:2;
     background:rgba(255,255,255,.88); 
     backdrop-filter:blur(8px);
     color:#333;
@@ -117,25 +119,38 @@ button:hover{
 .trees{
     position:fixed;
     bottom:0;
-    width:220px;
-    height:100%;
-    opacity:.18;
+    width:350px;
+    height:100vh;
+    opacity:.45;
     pointer-events:none;
+    z-index:0;
 }
 
 .left{
     left:0;
     background:
-    url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=800&auto=format&fit=crop")
-    center bottom/cover;
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.6),
+            transparent
+        ),
+        url("arvores.png");
+    background-size:cover;
+    background-position:center bottom;
 }
 
 .right{
     right:0;
     transform:scaleX(-1);
     background:
-    url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=800&auto=format&fit=crop")
-    center bottom/cover;
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.6),
+            transparent
+        ),
+        url("arvores.png");
+    background-size:cover;
+    background-position:center bottom;
 }
 
 @keyframes subir{
@@ -349,49 +364,56 @@ function iniciar(){
     gerarCoracoes();
 }
 
-function atualizarContador(){
+function atualizarContador() {
 
     const inicio = new Date("2017-09-25T00:00:00");
     const agora = new Date();
 
-    let anos =
-        agora.getFullYear() -
-        inicio.getFullYear();
+    let anos = agora.getFullYear() - inicio.getFullYear();
+    let meses = agora.getMonth() - inicio.getMonth();
+    let dias = agora.getDate() - inicio.getDate();
 
-    let meses =
-        agora.getMonth() -
-        inicio.getMonth();
-
-    let dias =
-        agora.getDate() -
-        inicio.getDate();
-
-    if(dias < 0){
-
+    if (dias < 0) {
         meses--;
 
-        const ultimoMes =
-            new Date(
-                agora.getFullYear(),
-                agora.getMonth(),
-                0
-            );
+        const ultimoMes = new Date(
+            agora.getFullYear(),
+            agora.getMonth(),
+            0
+        );
 
         dias += ultimoMes.getDate();
     }
 
-    if(meses < 0){
-
+    if (meses < 0) {
         anos--;
         meses += 12;
     }
 
-    const horas = agora.getHours();
-    const minutos = agora.getMinutes();
-    const segundos = agora.getSeconds();
+    // Horas, minutos e segundos decorridos desde o último aniversário mensal
+    const dataBase = new Date(
+        inicio.getFullYear() + anos,
+        inicio.getMonth() + meses,
+        inicio.getDate() + dias
+    );
 
-    document.getElementById("contador")
-        .innerHTML =
+    const diferenca = agora - dataBase;
+
+    const horas = Math.floor(
+        diferenca / (1000 * 60 * 60)
+    );
+
+    const minutos = Math.floor(
+        (diferenca % (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+
+    const segundos = Math.floor(
+        (diferenca % (1000 * 60)) /
+        1000
+    );
+
+    document.getElementById("contador").innerHTML =
         `❤️ Juntos há ${anos} anos, ${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos ❤️`;
 }
 
