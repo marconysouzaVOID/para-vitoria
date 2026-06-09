@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,6 +7,7 @@
 <title>Para Vitória ❤️</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -13,11 +15,29 @@
 }
 
 body{
-    font-family:Arial,sans-serif;
+    font-family: Arial, sans-serif;
+    min-height:100vh;
     background:linear-gradient(135deg,#ff758c,#ff7eb3);
-    color:#333;
-    text-align:center;
+    color:white;
     overflow-x:hidden;
+}
+
+#stars{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+}
+
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    animation:twinkle linear infinite;
+}
+
+@keyframes twinkle{
+    0%,100%{opacity:.2;}
+    50%{opacity:1;}
 }
 
 .container{
@@ -27,15 +47,22 @@ body{
 }
 
 .card{
-    background:white;
-    border-radius:20px;
-    padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    background:rgba(255,255,255,.95);
+    color:#333;
+    border-radius:25px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
 }
 
 h1{
     color:#ff4d6d;
     margin-bottom:15px;
+}
+
+h2{
+    color:#ff4d6d;
+    margin-top:20px;
 }
 
 button{
@@ -46,7 +73,7 @@ button{
     border-radius:999px;
     cursor:pointer;
     font-size:18px;
-    margin-top:20px;
+    transition:.3s;
 }
 
 button:hover{
@@ -58,53 +85,56 @@ button:hover{
 }
 
 #contador{
-    font-size:24px;
-    margin:30px 0;
-    font-weight:bold;
-    color:#ff4d6d;
-}
-
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
     margin-top:30px;
-}
-
-.gallery img{
-    width:100%;
-    border-radius:15px;
-    height:250px;
-    object-fit:cover;
+    font-size:24px;
+    color:#ff4d6d;
+    font-weight:bold;
 }
 
 .mensagem{
     margin-top:30px;
-    line-height:1.8;
+    line-height:1.9;
     font-size:20px;
+    min-height:250px;
 }
 
 .heart{
     position:fixed;
-    font-size:25px;
-    animation:float 5s linear forwards;
     pointer-events:none;
+    animation:subir 5s linear forwards;
 }
 
-@keyframes float{
+@keyframes subir{
     from{
         transform:translateY(0);
         opacity:1;
     }
     to{
-        transform:translateY(-700px);
+        transform:translateY(-800px);
         opacity:0;
     }
 }
+
+#futuro img{
+    width:100%;
+    max-width:500px;
+    border-radius:20px;
+    margin-top:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.futuro-texto{
+    margin-top:25px;
+    font-size:22px;
+    line-height:1.8;
+}
+
 </style>
 </head>
 
 <body>
+
+<div id="stars"></div>
 
 <div class="container">
 
@@ -122,96 +152,211 @@ Clique aqui ✨
 
 <div id="conteudo" class="hidden">
 
-<h2 style="margin-top:30px;">
+<h2>
 Do Loteamento Nova Aurora até a 13 de Julho...
 </h2>
 
 <div id="contador"></div>
 
-<div class="mensagem">
+<div id="mensagemDigitada" class="mensagem"></div>
 
-Mudaram os bairros.<br>
-Mudaram as ruas.<br>
-Mudaram os anos.<br><br>
+<div style="margin-top:60px;">
 
-Mas existe uma coisa que nunca mudou:<br><br>
+    <h2>
+        Mas existe uma coisa em que eu penso às vezes... ✨
+    </h2>
 
-<strong>
-Eu continuo escolhendo você todos os dias.
-</strong> ❤️<br><br>
+    <p style="margin-top:20px; line-height:1.8;">
+        Tudo o que vivemos até aqui foi incrível.
+        <br><br>
+        Mas talvez a melhor parte da nossa história
+        ainda não tenha acontecido.
+    </p>
 
-Obrigado por caminhar comigo desde
-25 de setembro de 2017.<br><br>
+    <button
+        style="margin-top:25px;"
+        onclick="mostrarFuturo()">
+        E o futuro nos aguarda...
+    </button>
 
-Você é minha melhor amiga,
-minha companheira
-e meu lugar favorito no mundo. ❤️
+    <div id="futuro" class="hidden">
+
+        <img src="bebe.png">
+
+        <p class="futuro-texto">
+            Quem sabe um dia...
+            <br><br>
+
+            Uma mistura do seu sorriso
+            com o meu jeito.
+            <br><br>
+
+            Um pedacinho de nós
+            correndo pela casa,
+            enchendo nossos dias
+            de novas memórias.
+            ❤️
+        </p>
+
+        <button
+            id="btnAmor"
+            style="margin-top:30px;"
+            onclick="explosaoDeAmor()">
+
+            Eu te amo ❤️
+
+        </button>
+
+    </div>
 
 </div>
 
-<div class="gallery">
-
-<!-- TROQUE DEPOIS PELAS FOTOS DE VOCÊS -->
-
-<img src="https://picsum.photos/600/600?random=1">
-
-<img src="https://picsum.photos/600/600?random=2">
-
-<img src="https://picsum.photos/600/600?random=3">
-
-<img src="https://picsum.photos/600/600?random=4">
-
 </div>
 
 </div>
 
 </div>
 
-</div>
-
-<!-- Troque pelo mp3 real -->
 <audio id="musica" loop>
-<source src="musica.mp3" type="audio/mpeg">
+    <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
+function criarEstrelas(){
+
+    const stars = document.getElementById("stars");
+
+    for(let i=0;i<150;i++){
+
+        const star = document.createElement("div");
+
+        star.classList.add("star");
+
+        const size = Math.random()*3;
+
+        star.style.width = size+"px";
+        star.style.height = size+"px";
+
+        star.style.left =
+            Math.random()*window.innerWidth+"px";
+
+        star.style.top =
+            Math.random()*window.innerHeight+"px";
+
+        star.style.animationDuration =
+            (2 + Math.random()*4)+"s";
+
+        stars.appendChild(star);
+    }
+}
+
+criarEstrelas();
+
+const textoMensagem = `
+Mudaram os bairros.
+
+Mudaram as ruas.
+
+Mudaram os anos.
+
+Mas existe uma coisa que nunca mudou.
+
+Eu continuo escolhendo você todos os dias. ❤️
+
+Obrigado por caminhar comigo desde 25 de setembro de 2017.
+
+Você é minha melhor amiga,
+minha companheira
+e meu lugar favorito no mundo.
+
+Te amo, Vitória. ❤️
+`;
+
+function digitarTexto(texto, elemento){
+
+    let i = 0;
+
+    function escrever(){
+
+        if(i < texto.length){
+
+            if(texto.charAt(i) === "\n"){
+                elemento.innerHTML += "<br>";
+            }else{
+                elemento.innerHTML += texto.charAt(i);
+            }
+
+            i++;
+
+            setTimeout(escrever,35);
+        }
+    }
+
+    escrever();
+}
+
 function iniciar(){
 
-    document.getElementById("conteudo").classList.remove("hidden");
+    document.getElementById("conteudo")
+        .classList.remove("hidden");
 
     document.getElementById("musica")
         .play()
         .catch(()=>{});
 
-    gerarCoracoes();
-
     atualizarContador();
 
+    digitarTexto(
+        textoMensagem,
+        document.getElementById("mensagemDigitada")
+    );
+
     setInterval(atualizarContador,1000);
+
+    gerarCoracoes();
 }
 
 function atualizarContador(){
 
-    const inicio = new Date("2017-09-25T00:00:00");
+    const inicio = new Date(2017,8,25);
+    const hoje = new Date();
 
-    const agora = new Date();
+    let anos =
+        hoje.getFullYear() -
+        inicio.getFullYear();
 
-    const diff = agora - inicio;
+    let meses =
+        hoje.getMonth() -
+        inicio.getMonth();
 
-    const dias = Math.floor(diff / (1000*60*60*24));
+    let dias =
+        hoje.getDate() -
+        inicio.getDate();
 
-    const horas =
-      Math.floor(diff/(1000*60*60)) % 24;
+    if(dias < 0){
 
-    const minutos =
-      Math.floor(diff/(1000*60)) % 60;
+        meses--;
 
-    const segundos =
-      Math.floor(diff/1000) % 60;
+        const ultimoMes =
+            new Date(
+                hoje.getFullYear(),
+                hoje.getMonth(),
+                0
+            );
 
-    document.getElementById("contador").innerHTML =
-      `❤️ Juntos há ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos ❤️`;
+        dias += ultimoMes.getDate();
+    }
+
+    if(meses < 0){
+
+        anos--;
+        meses += 12;
+    }
+
+    document.getElementById("contador")
+        .innerHTML =
+        `❤️ ${anos} anos, ${meses} meses e ${dias} dias juntos ❤️`;
 }
 
 function gerarCoracoes(){
@@ -219,16 +364,19 @@ function gerarCoracoes(){
     setInterval(()=>{
 
         const heart =
-          document.createElement("div");
+            document.createElement("div");
 
         heart.classList.add("heart");
 
         heart.innerHTML = "❤️";
 
         heart.style.left =
-          Math.random() * window.innerWidth + "px";
+            Math.random()*window.innerWidth+"px";
 
         heart.style.bottom = "-30px";
+
+        heart.style.fontSize =
+            (20 + Math.random()*20)+"px";
 
         document.body.appendChild(heart);
 
@@ -236,10 +384,109 @@ function gerarCoracoes(){
             heart.remove();
         },5000);
 
-    },300);
+    },600);
+}
+
+function mostrarFuturo(){
+
+    document.getElementById("futuro")
+        .classList.remove("hidden");
+
+    for(let i=0;i<50;i++){
+
+        setTimeout(()=>{
+
+            const heart =
+                document.createElement("div");
+
+            heart.classList.add("heart");
+
+            heart.innerHTML = "✨";
+
+            heart.style.left =
+                Math.random()*window.innerWidth+"px";
+
+            heart.style.bottom = "-20px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(()=>{
+                heart.remove();
+            },5000);
+
+        },i*80);
+    }
+
+    document
+        .getElementById("futuro")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+function explosaoDeAmor(){
+
+    const emojis = [
+        "❤️",
+        "💖",
+        "💕",
+        "💘",
+        "💞",
+        "✨"
+    ];
+
+    for(let i=0;i<350;i++){
+
+        setTimeout(()=>{
+
+            const heart =
+                document.createElement("div");
+
+            heart.classList.add("heart");
+
+            heart.innerHTML =
+                emojis[
+                    Math.floor(
+                        Math.random()*emojis.length
+                    )
+                ];
+
+            heart.style.left =
+                Math.random()*window.innerWidth+"px";
+
+            heart.style.bottom = "-50px";
+
+            heart.style.fontSize =
+                (20 + Math.random()*40)+"px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(()=>{
+                heart.remove();
+            },5000);
+
+        },i*12);
+    }
+
+    setTimeout(()=>{
+
+        alert(
+`Vitória ❤️
+
+Desde a segunda série até hoje...
+
+Eu nunca deixei de ter certeza de uma coisa:
+
+Eu escolheria você em todas as versões da minha vida.
+
+Te amo. ❤️`
+        );
+
+    },2500);
 }
 
 </script>
 
 </body>
 </html>
+```
